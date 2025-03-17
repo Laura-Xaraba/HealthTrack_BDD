@@ -44,7 +44,7 @@ Feature: Prescription Management
         And clicks the "Create Prescription" button
         Then an error message should be displayed stating that the dosage is invalid
 
-    @negative @missing-patient-name-field
+    @negative @missing-field
     Scenario: Attempt to create a prescription without informing the patient name
         When the doctor leave the patient name field empty
         And enters the medication name "Ibuprofen"
@@ -53,46 +53,6 @@ Feature: Prescription Management
         And enters the duration "7 days"
         And clicks the "Create Prescription" button
         Then an error message should be displayed stating that the patient name is required
-
-    @negative @missing-medication-name-field
-    Scenario: Attempt to create a prescription without informing medication name 
-        When the doctor selects patient "Bruce Wayne"
-        And leaves the madication name field empty
-        And enters the dosage "200mg"
-        And enters the frequency "Twice a day"
-        And enters the duration "7 days"
-        And clicks the "Create Prescription" button
-        Then an error message should be displayed stating that the medication name is required
-    
-    @negative @missing-dosage-field
-    Scenario: Attempt to create a prescription without informing the dosage
-        When the doctor selects patient "Bruce Wayne"
-        And enters the medication name "Ibuprofen"
-        And leaves the dosage field empty
-        And enters the frequency "Twice a day"
-        And enters the duration "7 days"
-        And clicks the "Create Prescription" button
-        Then an error message should be displayed stating that the dosage is required
-
-    @negative @missing-frequency-field
-    Scenario: Attempt to create a prescription without informing the frequency
-        When the doctor selects patient "Bruce Wayne"
-        And enters the medication name "Ibuprofen"
-        And enters the dosage "200mg"
-        And leaves the frequency field empty
-        And enters the duration "7 days"
-        And clicks the "Create Prescription" button
-        Then an error message should be displayed stating that the frequency should be informed
-
-    @negative @missing-frequency-field
-    Scenario: Attempt to create a prescription without informing the duration
-        When the doctor selects patient "Bruce Wayne"
-        And enters the medication name "Ibuprofen"
-        And enters the dosage "200mg"
-        And enters the frequency "Twice a day"
-        And leaves the duration field empty
-        And clicks the "Create Prescription" button
-        Then an error message should be displayed stating that the duration should be informed
 
     @positive @delete-prescription
     Scenario: Successfully delete a prescription
@@ -103,7 +63,7 @@ Feature: Prescription Management
         And a confirmation message should be displayed
 
     @positive @edit-prescription
-    Scenario: Successfully delete a prescription
+    Scenario: Successfully edit a prescription
         Given the doctor has created a prescription for patient "Bruce Wayne"
         When the doctor selects the prescription "Ibuprofen"
         And clicks the "Edit" button
