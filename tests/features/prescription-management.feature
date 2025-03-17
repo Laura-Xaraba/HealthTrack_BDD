@@ -22,6 +22,7 @@ Feature: Prescription Management
         And clicks the "Create Prescription" button
         Then the prescription should be created successfully
         And a confirmation message should be displayed
+        And the prescription data should be encrypted and stored securely
 
     @negative @invalid-medication
     Scenario: Attempt to create a prescription with an invalid medication
@@ -61,6 +62,7 @@ Feature: Prescription Management
         And clicks the "Delete" button
         Then the prescription should be deleted successfully
         And a confirmation message should be displayed
+        And the prescription data should be encrypted and stored securely
 
     @positive @edit-prescription
     Scenario: Successfully edit a prescription
@@ -71,3 +73,10 @@ Feature: Prescription Management
         And clicks the "Save" button
         Then the prescription should be edited successfully
         And a confirmation message should be displayed
+        And the prescription data should be encrypted and stored securely
+
+    @negative @unauthorized-access
+    Scenario: Attempt to create a prescription without proper authorization
+        Given the doctor is not authorized to prescribe medications for "Bruce Wayne"
+            When the doctor attempts to select the patient "Bruce Wayne"
+            Then an error message should be displayed stating that the doctor is not authorized to prescribe for this patient

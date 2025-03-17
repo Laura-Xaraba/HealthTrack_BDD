@@ -19,6 +19,7 @@ Feature: Health Indicators Monitoring
         And clicks the "Save" button
         Then the health indicator should be recorded successfully
         And a confirmation message should be displayed
+        And the patient's consent for the health data collection should be recorded
 
     @positive @indicator-out-of-range
     Scenario: Record a health indicator with an out-of-range value
@@ -27,8 +28,9 @@ Feature: Health Indicators Monitoring
         And selects the date "2025-03-20"
         And clicks the "Save" button
         Then the health indicator should be recorded successfully
+        And the patient's consent for the health data collection should be recorded
         And an alert should be displayed notifying that the blood sugar is out-of-range
-        And the doctor should be notified that the patient health indicator is out-of-range
+        And the doctor should be notified that the patient health indicator is abnormal
 
     @negative @missing-indicator
     Scenario: Attempt to record a health indicator without selecting the indicator type
@@ -50,6 +52,7 @@ Feature: Health Indicators Monitoring
     Scenario: View trends for recorded health indicators
         Given the patient has recorded multiple health indicators over time
         When the patient clicks the "View Trends" button
+        And is authorized to access teh data
         Then the system should display a graph showing the trend of the recorded indicators over time
         And the patient should be able to view the data in both chart and table formats
 

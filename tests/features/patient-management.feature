@@ -32,7 +32,9 @@ Feature: Patient Management
     Scenario: Attempt to view patient information without authorization
         Given the doctor is not authorized to view patient "Bruce Wayne"
         When the doctor selects patient "Bruce Wayne"
-        Then an error message should be displayed stating that the doctor is not authorized to access this patient's information
+        Then access to the patient's sensitive data should be denied
+        And error message should be displayed stating that the doctor is not authorized to access this patient's information
+        And the administration should be informed about the unauthorized attempt
 
     @positive @send-message-to-patient
     Scenario: Successfully send a message to a patient
@@ -42,6 +44,7 @@ Feature: Patient Management
         And clicks the "Send Message" button
         Then the message should be sent successfully
         And a confirmation message should be displayed
+        And the modification action should be logged for compliance auditing
 
     @negative @delete-patient-info
     Scenario: Attempt to delete patient information
@@ -52,3 +55,4 @@ Feature: Patient Management
         When the doctor confirms the deletion
         Then the patient information should be deleted successfully
         And a confirmation message should be displayed
+        And the modification action should be logged for compliance auditing

@@ -19,8 +19,19 @@ Feature: Account Creation
         And enters password "Password@123"
         And enters age "25"
         And clicks the "Create Account" button
+        And agrees to the terms of data usage consent
         Then the account should be created successfully
         And a confirmation message should be displayed
+
+    @positive @valid-data
+    Scenario: Successfully create an account with valid data
+        When the user enters username "user123"
+        And enters email "user@email.com"
+        And enters password "Password@123"
+        And enters age "25"
+        And clicks the "Create Account" button
+        And does not agree to the terms of data usage consent
+        Then an error message should be displayed stating that consent is required to proceed
 
     @negative @invalid-password
     Scenario: Attempt to create an account with an invalid password
@@ -28,6 +39,7 @@ Feature: Account Creation
         And enters email "user@email.com"
         And enters password "password123"
         And enters age "25"
+        And agrees to the terms of data usage consent
         And clicks the "Create Account" button
         Then an error message should be displayed stating that the password must be between 8 and 12 characters long and include at least one number and one special character
 
@@ -37,6 +49,7 @@ Feature: Account Creation
         And enters email "user@email.com"
         And enters password "Password@123"
         And enters age "15"
+        And agrees to the terms of data usage consent
         And clicks the "Create Account" button
         Then an error message should be displayed stating that the age must be between 18 and 100
 
@@ -46,6 +59,7 @@ Feature: Account Creation
         And enters email "user-email.com"
         And enters password "Password@123"
         And enters age "25"
+        And agrees to the terms of data usage consent
         And clicks the "Create accout" button
         Then an error message should be displayed stating that the email must be in a valid format
 
@@ -55,5 +69,6 @@ Feature: Account Creation
         And enters email "user@email.com"
         And enters password "PW@123"
         And enters age "25"
+        And agrees to the terms of data usage consent
         And clicks the "Create Account" button
         Then an error message should be displayed stating that the password must be between 8 and 12 characters

@@ -21,6 +21,7 @@ Feature: Appointment Scheduling
         And clicks the "Schedule Appointment" button
         Then the appointment should be scheduled successfully
         And a confirmation message should be displayed
+        And the patient's consent for appointment data storage should be recorded
 
     @negative @doctor-unavailable
     Scenario: Attempt to schedule an appointment with an unavaliable doctor
@@ -50,3 +51,10 @@ Feature: Appointment Scheduling
         And selects the appointment type "In-person"
         And clicks the "Schedule Appointment" button
         Then an error message should be displayed stating that the doctor must be selected
+
+    @negative @unauthorized-access
+    Scenario: Attempt to schedule an appointment without proper permissions
+        Given the user is not authorized to schedule appointments
+        When the user attempts to book an appointment
+        And clicks the "Schedule Appointment" button
+        Then an error message should be displayed stating that the user is not authorized to schedule appointments

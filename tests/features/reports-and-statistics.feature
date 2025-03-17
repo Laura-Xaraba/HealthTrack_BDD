@@ -31,6 +31,7 @@ Feature: Reports and Statistics
         When the doctor/administrator clicks the "Export to PDF" button
         Then the health report should be exported as a PDF file
         And the doctor/administrator should be able to download the file
+        And the report export action should be logged for compliance auditing
 
     @positive @export-Excel
     Scenario: Successfully export health report to Excel
@@ -38,6 +39,7 @@ Feature: Reports and Statistics
         When the doctor/administrator clicks the "Export to Excel" button
         Then the health statistics should be exported as an Excel file
         And the doctor/administrator should be able to download the file
+        And the report export action should be logged for compliance auditing
 
     @negative @no-report-found
     Scenario: Attempt to view a report when no data is available

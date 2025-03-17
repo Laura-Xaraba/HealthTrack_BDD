@@ -34,6 +34,7 @@ Feature: User Login
         And clicks the "Login" button
         Then the account should be locked for 15 minutes
         And an error message should be displayed stating that the account is temporarily locked
+        And an email should be sent to the address registered in the account from which the login attempt was made
 
     @negative @empty-fields
     Scenario: Attempt to log in with empty username or password
