@@ -1,6 +1,7 @@
 #encoding: UTF-8
 #language: en-us
 
+@registration @user-management
 Feature: Account Creation
     As a new user,
     I want to create an account,
